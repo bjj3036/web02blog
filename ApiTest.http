@@ -4,3 +4,19 @@
 # * 'gtrp' and 'gtr' create a GET request with or without query parameters;
 # * 'ptr' and 'ptrp' create a POST request with a simple or parameter-like body;
 # * 'mptr' and 'fptr' create a POST request to submit a form with a text or file field (multipart/form-data);
+POST http://localhost:8080/user/create
+Content-Type: application/json
+
+{
+"account": "bjj3036",
+  "password": "qwer1234",
+  "name": "baejunjae",
+  "email": "aaa@naver.com",
+  "phone": "010-0000-1111"
+}
+
+###
+GET http://localhost:8080/user/readAll
+Accept: application/json
+
+###

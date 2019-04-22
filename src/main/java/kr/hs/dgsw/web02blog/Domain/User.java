@@ -69,7 +69,7 @@ public class User {
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-512");
             md.update(password.getBytes(), 0, password.getBytes().length);
-            this.password = new BigInteger(1, md.digest()).toString(16);
+            password = new BigInteger(1, md.digest()).toString(16);
         } catch (NoSuchAlgorithmException e) {
             Logger logger = LoggerFactory.getLogger(User.class);
             logger.warn(e.getMessage());
