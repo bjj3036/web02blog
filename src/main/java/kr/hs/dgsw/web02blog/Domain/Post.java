@@ -7,6 +7,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 public class Post {
@@ -17,9 +18,11 @@ public class Post {
 
     @Column(nullable = false)
     private Long userId;
+    @Column(columnDefinition = "TEXT")
     private String content;
-    private String filePath;
-    private String fileName;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    private List<Attachment> pictures;
 
     @CreationTimestamp
     @Column(updatable = false, nullable = false)
@@ -55,20 +58,12 @@ public class Post {
         this.content = content;
     }
 
-    public String getFilePath() {
-        return filePath;
+    public List<Attachment> getPictures() {
+        return pictures;
     }
 
-    public void setFilePath(String filePath) {
-        this.filePath = filePath;
-    }
-
-    public String getFileName() {
-        return fileName;
-    }
-
-    public void setFileName(String fileName) {
-        this.fileName = fileName;
+    public void setPictures(List<Attachment> pictures) {
+        this.pictures = pictures;
     }
 
     public LocalDateTime getCreated() {

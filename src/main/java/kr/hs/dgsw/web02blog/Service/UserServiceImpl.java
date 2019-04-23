@@ -1,13 +1,17 @@
 package kr.hs.dgsw.web02blog.Service;
 
+import kr.hs.dgsw.web02blog.Domain.Attachment;
 import kr.hs.dgsw.web02blog.Domain.Post;
 import kr.hs.dgsw.web02blog.Domain.User;
 import kr.hs.dgsw.web02blog.Repository.UserRepository;
-import org.apache.el.stream.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -15,20 +19,26 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
 
     @Override
-    public User createUser(User user) {
+    public User createUser(User user) throws Exception {
         if (this.userRepository.findByAccount(user.getAccount()).isPresent())
-            return null;
+            throw new Exception("Already exist User same Account");
         return this.userRepository.save(user);
     }
 
     @Override
-    public User readUser(Long id) {
-        return this.userRepository.findById(id).orElse(null);
+    public User readUser(Long id) throws Exception {
+        Optional<User> found = this.userRepository.findById(id);
+        if (!found.isPresent())
+            throw new Exception("Can not find User");
+        return found.get();
     }
 
     @Override
-    public User readUser(String account) {
-        return this.userRepository.findByAccount(account).orElse(null);
+    public User readUser(String account) throws Exception {
+        Optional<User> found = this.userRepository.findByAccount(account);
+        if (!found.isPresent())
+            throw new Exception("Can not find User");
+        return found.get();
     }
 
     @Override
@@ -37,7 +47,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User updateUser(User user) {
+    public User updateUser(User user) throws Exception {
         User found = this.userRepository.findById(user.getId()).map(user1 -> {
             if (!user.getEmail().isEmpty())
                 user1.setEmail(user.getEmail());
@@ -48,18 +58,24 @@ public class UserServiceImpl implements UserService {
             return user1;
         }).orElse(null);
         if (found == null)
-            return null;
+            throw new Exception("Can not find User");
         this.userRepository.save(found);
         return null;
     }
 
     @Override
-    public boolean removeUser(Long id) {
-        try {
-            this.userRepository.deleteById(id);
-        } catch (Exception e) {
-            return false;
-        }
+    public boolean removeUser(Long id) throws Exception {
+        this.userRepository.deleteById(id);
         return true;
+    }
+
+    @Override
+    public void showProfile(Long id, HttpServletRequest req, HttpServletResponse res) {
+
+    }
+
+    @Override
+    public Attachment uploadProfile(Long id, MultipartFile uploadFile) throws Exception{
+        return null;
     }
 }

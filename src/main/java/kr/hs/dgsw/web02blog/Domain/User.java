@@ -33,7 +33,7 @@ public class User {
     @Column(unique = true)
     private String phone;
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private String pofilePath;
+    private String profilePath;
 
     @CreationTimestamp
     @Column(updatable = false, nullable = false)
@@ -101,12 +101,12 @@ public class User {
         this.phone = phone;
     }
 
-    public String getPofilePath() {
-        return pofilePath;
+    public String getprofilePath() {
+        return profilePath;
     }
 
-    public void setPofilePath(String pofilePath) {
-        this.pofilePath = pofilePath;
+    public void setprofilePath(String pofilePath) {
+        this.profilePath = pofilePath;
     }
 
     public LocalDateTime getCreated() {
