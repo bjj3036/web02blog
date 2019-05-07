@@ -13,7 +13,7 @@
     <h2>DGSW블로그</h2>
 </header>
 <aside class="left container">
-    <h3>새 글 쓰기</h3>
+    <h3 onclick="showEditPost()">새 글 쓰기</h3><br>
     <h4>최근 글</h4>
     <ul id="post_list">
     </ul>
@@ -21,15 +21,26 @@
 <section class="container">
     <div id="content" class="content">
         <h3 id="post_title"></h3>
+        <input id="edit_title" style="width: 100%;">
         <hr>
-        <div style="display: flex; justify-content: space-between"><h5 id="post_author"></h5><h5 id="post_created"></h5></div>
-        <div id="post_content">
-
+        <div id="post_info_box" style="display: flex; justify-content: space-between">
+            <h5 id="post_author"></h5>
+            <h5 id="post_created"></h5>
         </div>
+        <button id="button1_post" onclick="button1Click(event)">수정</button>
+        <button id="button2_post" onclick="button2Click(event)">삭제</button>
+        <div id="post_content">
+        </div>
+        <textarea id="edit_content" style="width: 100%;" rows="28"></textarea>
     </div>
 </section>
 <aside class="right container">
-    RIGHT
+    <div id="user_info">
+        <img src="user-profile.jpg" width="120px" height="120px" class="circle_img">
+        <h4 id="user_id">사용자아이디</h4>
+        <h4 id="user_name">사용자 이름</h4><br>
+        <h4 id="user_created">사용자아이디</h4>
+    </div>
 </aside>
 <footer class="container">
     Powered by DGSW

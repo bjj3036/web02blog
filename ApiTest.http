@@ -30,3 +30,8 @@ GET http://localhost:8080/user/readAll
 Accept: application/json
 
 ###
+
+GET http://localhost:8080/user/readAll
+Accept: application/json
+
+###

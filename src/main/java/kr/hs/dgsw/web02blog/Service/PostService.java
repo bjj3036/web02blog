@@ -14,7 +14,7 @@ public interface PostService {
 
     PostUsernameProtocol readPost(Long id) throws Exception;
 
-    PostUsernameProtocol readPostByUserId(Long id) throws Exception;
+    PostUsernameProtocol readLatestPostByUserId(Long id) throws Exception;
 
     List<PostUsernameProtocol> readAllPost();
 

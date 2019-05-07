@@ -43,7 +43,7 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public PostUsernameProtocol readPostByUserId(Long id) throws Exception {
+    public PostUsernameProtocol readLatestPostByUserId(Long id) throws Exception {
         Optional<Post> found = this.postRepository.findTopByUserIdOrderByIdDesc(id);
         if (!found.isPresent())
             throw new Exception("Can not find Post");
@@ -62,8 +62,8 @@ public class PostServiceImpl implements PostService {
     @Override
     public PostUsernameProtocol updatePost(Post post) throws Exception {
         Post found = this.postRepository.findById(post.getId()).map(post1 -> {
-            if (!post.getContent().isEmpty())
-                post1.setContent(post.getContent());
+            post1.setTitle(post.getTitle());
+            post1.setContent(post.getContent());
             return post1;
         }).orElse(null);
         if (found == null)

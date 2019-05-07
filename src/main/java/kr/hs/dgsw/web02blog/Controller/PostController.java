@@ -29,6 +29,15 @@ public class PostController {
         return new ResponseFormat(ResponseType.POST_GET, this.postService.readAllPost());
     }
 
+    @GetMapping("/post/readLatest/{id}")
+    public ResponseFormat readLatest(@PathVariable Long id) {
+        try {
+            return new ResponseFormat(ResponseType.POST_GET, this.postService.readLatestPostByUserId(id));
+        } catch (Exception e) {
+            return new ResponseFormat(ResponseType.FAIL, e.getMessage());
+        }
+    }
+
     @PostMapping("/post/create")
     public ResponseFormat createPost(@RequestBody Post post) {
         try {
